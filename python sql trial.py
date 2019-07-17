@@ -8,7 +8,7 @@ Created on Thu May 30 16:21:54 2019
 
 
 import pyodbc 
-
+import pandas as pd
 
 server = "imccodes.database.windows.net,1433"
 username = "ICDCPT"
@@ -20,19 +20,53 @@ database = "imccodes"
 
 conn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
 
+sql = 'select * from D2'
+sql2 = 'select * from D6'
 
-cursor = conn.cursor() 
+ICDcodes = pd.read_sql(sql,conn)
+Pcodes = pd.read_sql(sql2,conn)
 
-ICD=cursor.execute('SELECT * FROM D2')
+conn.close()
 
-Pcodes=cursor.execute('SELECT * FROM D6')
 
-ICD10=[]
-for row in ICD:
-    ICD10.append(row)
-ICD10
+#fix column names
+#change index
 
-for row in Pcodes:
-    print(row)
+
+
+
+
+
+
+
+'''cursor = conn.cursor() 
+
+
+
+cursor.execute('SELECT * FROM D2')
+ICDcodes=cursor.fetchall()
+
+cursor.execute('SELECT * FROM D6')
+Pcode=cursor.fetchall()
     
 conn.close()
+
+
+
+ICD=open('ICDtrial.txt','w')
+for item in ICDcodes:
+    print(item,file=ICD)
+ICD.close()
+
+
+Pcodes=open('Pcodestrial.txt','w')
+for item in Pcode:
+    print(item,file=Pcodes)
+ICD.close()
+'''
+
+
+
+
+
+
