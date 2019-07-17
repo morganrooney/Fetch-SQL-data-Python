@@ -28,8 +28,9 @@ Pcodes = pd.read_sql(sql2,conn)
 
 conn.close()
 
+ICDcodes=ICDcodes.drop(columns='rownames')
+Pcodes=Pcodes.drop(columns='rownames')
 
-#fix column names
 #change index
 
 
